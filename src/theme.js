@@ -21,7 +21,7 @@ const newTheme = createTheme({
           main: '#119978'
         },
         secondary: {
-          main: '#eeeeee'
+          main: '#888888'
         },
         text: {
           primary: '#031410',

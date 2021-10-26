@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Grid } from '@mui/material'
 import { Box } from '@mui/system';
 import { makeStyles } from '@mui/styles';
+import { useDispatch } from 'react-redux';
 
 import Header from '../Header/Header';
 import Posts from '../Posts/Posts';
@@ -20,6 +21,23 @@ const useStyle = makeStyles((theme) => ({
 
 function MainPage() {
     const classes = useStyle();
+
+    const dispatch = useDispatch();
+    const fetchPosts = useCallback(
+        () => {
+            fetch('https://spacenews-4a56b-default-rtdb.europe-west1.firebasedatabase.app/posts.json')
+            .then(response => response.json())
+            .then(data => {
+                dispatch({type: 'getPosts', posts: data})
+            })
+            .catch(err => console.log(err))
+        },
+        [],
+    )
+
+    useEffect(()=>{
+        fetchPosts();
+    }, [fetchPosts])
 
     return (
         <React.Fragment>

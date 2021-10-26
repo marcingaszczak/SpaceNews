@@ -1,7 +1,7 @@
 import React from 'react'
 import { Avatar, Typography } from '@mui/material'
-import { Box } from '@mui/system'
-import { useSelector } from 'react-redux'
+import { Box } from '@mui/system';
+import { useSelector } from 'react-redux';
 
 
 function LeftPanelLogged() {
