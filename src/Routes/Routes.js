@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route } from 'react-router-dom';
+import { Route , Redirect} from 'react-router-dom';
 
 
 import Login from '../Screens/Login';
@@ -12,8 +12,10 @@ import MainPage from '../Screens/MainPage';
 function Routes() {
     return (
         <React.Fragment>
-
                 <Route path='/' exact>
+                    {!localStorage.getItem('username') ? <Redirect to='/login'/> : <Redirect to='/main'/>}
+                </Route>
+                <Route path='/login' exact>
                     <Login />
                 </Route>
                 <Route path='/signIn'>

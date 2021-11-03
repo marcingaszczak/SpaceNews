@@ -27,7 +27,7 @@ function Like(props) {
         postNamesArray.forEach(post => {
             if(post === postId) {
                 clickedPost = post;
-            } else return;;
+            } else return;
         })
         const newLikes = state.posts[clickedPost].likes + 1;
         let likedBy = '';
@@ -62,7 +62,6 @@ function Like(props) {
         .catch(err => console.log(err))
     }
 
-
     const handleMinusClick = () => {
         setClicked(false)
         postNamesArray.forEach(post => {
@@ -88,7 +87,7 @@ function Like(props) {
                 author: state.posts[clickedPost].author,
                 content: state.posts[clickedPost].content,
                 date: state.posts[clickedPost].date,
-                likes: state.posts[clickedPost].likes,
+                likes: newLikes,
                 likedBy: remove})
         })
         .then(response => response.json())
@@ -100,11 +99,6 @@ function Like(props) {
         })
         .catch(err => console.log(err))
     }
-
-
-    //set variable for liked/not liked (change thumb color)
-
-
 
     return (
         <React.Fragment>
@@ -120,5 +114,3 @@ function Like(props) {
 }
 
 export default Like
-
-

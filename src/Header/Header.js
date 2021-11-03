@@ -20,7 +20,7 @@ function Header() {
     }
 
     return (
-        <AppBar p={1} color='primary' position='sticky' sx={{height: '4rem'}}>
+        <AppBar p={1} color='primary' position='sticky' sx={{height: '4rem', width: '100vw'}}>
             <Toolbar>
                 <Box sx={{ flexGrow: 1 }} >
                     <Box component={Link} to='/'>
@@ -33,13 +33,13 @@ function Header() {
                             <Button component={Link} to='/' size='large' color="inherit">Login</Button>
                         </Box>
                         <Box mr={3}>
-                            <Button component={Link} to='/signIn' size='large' color="inherit">Sign In</Button>
+                            <Button component={Link} to='/signIn' size='large' color="inherit">Sign Up</Button>
                         </Box>
                     </Grid>
                 )}
                 {isLoggedIn && (
                     <Box mr={3}>
-                        <Button onClick={handleLogout} component={Link} to='/' size='large' color="inherit">Logout</Button>
+                        <Button onClick={handleLogout} component={Link} to='/login' size='large' color="inherit">Logout</Button>
                     </Box>
                 )}
             </Toolbar>
