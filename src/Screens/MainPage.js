@@ -22,7 +22,7 @@ const useStyle = makeStyles((theme) => ({
     },
     chats: {
         position: 'sticky',
-        top: '11.6vh'
+        top: '11.6vh',
     }
 }))
 

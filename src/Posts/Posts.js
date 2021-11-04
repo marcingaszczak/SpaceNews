@@ -6,9 +6,11 @@ import { Formik } from "formik";
 import * as Yup from 'yup';
 import moment from "moment";
 
+
 import pic from './../Img/default_profile.jpg';
 import Like from './Like/Like';
 import Comments from './Comments/Comments';
+
 
 const style = {
     position: 'absolute',
@@ -148,7 +150,7 @@ function Posts() {
                 </Box>
 
         </Modal>
-        <Box sx={{ padding: 3, width: '100%', bgcolor: 'background.paper'}}>
+        <Box sx={{ marginBottom: 2, padding: 3, width: '100%', bgcolor: 'background.paper'}}>
             {Object.keys(objectPosts).map(post => (
                 <Box textAlign='center' sx={{ border: 1, borderRadius: 2, width: '100%'}} mb={3} key={post}>
                 <Grid sx={{padding: 2}}>
@@ -160,7 +162,7 @@ function Posts() {
                                         <Avatar sx={{ width: 48, height: 48 }} src={pic} />
                                     </TableCell>
                                     <TableCell sx={{padding: 0, border: 0 }} >
-                                        <Typography>
+                                        <Typography >
                                             {objectPosts[post].author}
                                         </Typography>
                                         <Typography variant='subtitle2'>
