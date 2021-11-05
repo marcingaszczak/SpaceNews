@@ -49,7 +49,7 @@ const useStyle = makeStyles((theme) => ({
         height: '75vh',
         zIndex: 10,
         position: 'absolute',
-        left: 65,
+        left: '4.15vw',
         top: 16,
         display: 'flex',
         alignItems: 'center',

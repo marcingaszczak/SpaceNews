@@ -8,6 +8,7 @@ import Posts from '../Posts/Posts';
 import LeftPanelLogged from './../LeftPanelLogged/LeftPanelLogged';
 import AddPost from '../Posts/AddPost/AddPost';
 import Chats from '../Chats/Chats';
+import { Redirect } from 'react-router';
 
 const useStyle = makeStyles((theme) => ({
     root: {
@@ -53,6 +54,7 @@ function MainPage() {
 
     return (
         <React.Fragment>
+            {!localStorage.getItem('username') && <Redirect to='/login' />}
             <Header />
             <Grid className={classes.root} container justifyContent="center" alignItems="flex-start" spacing={2} m={0}>
                 <Grid item xs={4} justifyContent="center" align="center" className={classes.userPanel}>
