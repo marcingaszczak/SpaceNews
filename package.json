@@ -1,6 +1,7 @@
 {
   "name": "space_news",
   "version": "0.1.0",
+  "homepage": "https://marcingaszczak.com/SpaceNews",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.4.1",

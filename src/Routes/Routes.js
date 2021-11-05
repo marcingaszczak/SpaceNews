@@ -13,7 +13,7 @@ function Routes() {
     return (
         <React.Fragment>
                 <Route path='/' exact>
-                    {!localStorage.getItem('username') ? <Redirect to='/login'/> : <Redirect to='/main'/>}
+                    {!localStorage.getItem('isLoggedIn') ? <Redirect to='/login'/> : <Redirect to='/main'/>}
                 </Route>
                 <Route path='/login' exact>
                     <Login />
