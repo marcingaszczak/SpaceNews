@@ -47,8 +47,8 @@ function Login() {
     return (
         <React.Fragment>
             <Header />
-            <Grid className={classes.root} container spacing={2} m={0}>
-                <Grid item xs={12} alignItems='center' justifyContent='center' textAlign='center'>
+            <Grid className={classes.root} container spacing={2} m={0} justifyContent='center'>
+                <Grid item xs={10} md={6} p={4} alignItems='center' justifyContent='center' textAlign='center'>
                     <Formik
                     initialValues={{
                         emial: '',
@@ -112,7 +112,7 @@ function Login() {
                                             value={values.email}/>
                                     </Box>
                                     <Box m={4}  >
-                                        <TextField  sx={{ width: '50%' }}
+                                        <TextField
                                         color='secondary'
                                         variant='outlined'
                                         label='Password'

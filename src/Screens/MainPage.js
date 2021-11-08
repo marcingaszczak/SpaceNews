@@ -16,7 +16,11 @@ const useStyle = makeStyles((theme) => ({
     },
     userPanel: {
         position: 'sticky',
-        top: '11.6vh'
+        top: '11.6vh',
+        [theme.breakpoints.down('sm')]: {
+            position: 'relative',
+            top: '0vh'
+        },
     },
     posts: {
         position: 'relative'
@@ -57,14 +61,14 @@ function MainPage() {
             {!localStorage.getItem('username') && <Redirect to='/login' />}
             <Header />
             <Grid className={classes.root} container justifyContent="center" alignItems="flex-start" spacing={2} m={0}>
-                <Grid item xs={4} justifyContent="center" align="center" className={classes.userPanel}>
+                <Grid item xs={12} sm={4} justifyContent="center" align="center" className={classes.userPanel}>
                     <LeftPanelLogged />
                 </Grid>
-                <Grid item xs={4} className={classes.posts}>
+                <Grid item xs={10} sm={4}  className={classes.posts}>
                     <AddPost />
                     <Posts />
                 </Grid>
-                <Grid item xs={4} justifyContent="center" align="center" className={classes.chats}>
+                <Grid item xs={12} sm={4}  justifyContent="center" align="center" className={classes.chats}>
                     <Chats />
                 </Grid>
             </Grid>

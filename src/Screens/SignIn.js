@@ -20,7 +20,7 @@ const useStyle = makeStyles((theme) => ({
     },
     container: {
         backgroundColor: theme.palette.primary.main,
-        height: '70vh',
+        height: '60vh',
         marginTop: '8vh',
         display: 'flex',
         flexDirection: 'column',
@@ -50,8 +50,8 @@ function SignIn() {
     return (
         <React.Fragment>
             <Header />
-            <Grid className={classes.root} container spacing={2} m={0}>
-                <Grid item xs={12} alignItems='center' justifyContent='center' textAlign='center'>
+            <Grid className={classes.root} container spacing={2} m={0} justifyContent='center'>
+                <Grid item xs={10} md={6} p={4} alignItems='center' justifyContent='center' textAlign='center'>
                     <Formik
                     initialValues={{
                         emial: '',
@@ -115,7 +115,7 @@ function SignIn() {
                                             value={values.email}/>
                                     </Box>
                                     <Box m={4}  >
-                                        <TextField  sx={{ width: '50%' }}
+                                        <TextField
                                         color='secondary'
                                         variant='outlined'
                                         label='Password'
@@ -127,7 +127,7 @@ function SignIn() {
                                         value={values.password}/>
                                     </Box>
                                     <Box m={4}  >
-                                        <TextField  sx={{ width: '50%' }}
+                                        <TextField
                                         color='secondary'
                                         variant='outlined'
                                         label='Confirm Password'

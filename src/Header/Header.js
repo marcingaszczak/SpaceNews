@@ -20,7 +20,7 @@ function Header() {
     }
 
     return (
-        <AppBar p={1} color='primary' position='sticky' sx={{height: '4rem', width: '100vw'}}>
+        <AppBar p={1} color='primary' position='sticky' sx={{height: '4rem', width: '100vw', overflowX: 'hidden'}}>
             <Toolbar>
                 <Box sx={{ flexGrow: 1 }} >
                     <Box component={Link} to='/'>

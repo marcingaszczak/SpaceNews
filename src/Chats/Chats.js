@@ -55,6 +55,11 @@ const useStyle = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'center',
         overflow: 'hidden',
+        [theme.breakpoints.down('sm')]: {
+            left: '10vw',
+            width: '78vw',
+            marginLeft: '16px'
+        }
     }
 }))
 

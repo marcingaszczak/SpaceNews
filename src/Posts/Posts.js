@@ -5,26 +5,45 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from "formik";
 import * as Yup from 'yup';
 import moment from "moment";
+import { makeStyles } from '@mui/styles'
 
 
 import pic from './../Img/default_profile.jpg';
 import Like from './Like/Like';
 import Comments from './Comments/Comments';
 
-
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '30vw',
-    height: '30vh',
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-    flexDirection: 'row'
-  };
+const useStyle = makeStyles((theme) => ({
+    root: {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: '30vw',
+        height: '30vh',
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+        flexDirection: 'row',
+        [theme.breakpoints.down('sm')]: {
+            width: '70vw'
+        }
+    },
+    header: {
+        borderBottom: '1px solid #000',
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'space-between',
+        [theme.breakpoints.down('sm')]: {
+            flexDirection: 'column !important'
+        }
+    },
+    postInfo: {
+        display: 'flex',
+        flexDirection: 'row',
+        textAlign: 'left'
+    }
+}))
 
   const validate = Yup.object().shape({
       content: Yup.string()
@@ -39,6 +58,7 @@ function Posts() {
     let user = useSelector(state => state.username)
     let state = useSelector(state => state)
     const dispatch = useDispatch()
+    const classes = useStyle();
 
     //variables for editing post
     const [postData, setPostData] = useState('')
@@ -92,7 +112,7 @@ function Posts() {
         <React.Fragment>
         <Modal
             open={open}>
-                <Box sx={style} >
+                <Box className = {classes.root} >
                     <Formik
                     enableReinitialize={true}
                     initialValues={{
@@ -154,8 +174,8 @@ function Posts() {
             {Object.keys(objectPosts).map(post => (
                 <Box textAlign='center' sx={{ border: 1, borderRadius: 2, width: '100%'}} mb={3} key={post}>
                 <Grid sx={{padding: 2}}>
-                    <Grid sx={{borderBottom: 1, width: '100%'}}>
-                        <Table>
+                    <Grid xs={12} className={classes.header} >
+                        {/* <Table>
                             <tbody>
                                 <TableRow >
                                     <TableCell sx={{padding: 0, border: 0, paddingBottom: 1, paddingLeft: 1, width: '15%'}}>
@@ -170,14 +190,33 @@ function Posts() {
                                         </Typography>
                                     </TableCell>
                                     {user === objectPosts[post].author &&
-                                    <TableCell align="right" sx={{border: 0}}>
+                                    <TableCell xs={12} align="right" sx={{border: 0}}>
                                         <Button onClick={()=> handleEditClick(post)}>EDIT</Button>
                                         <Button onClick={()=> handleDeleteClick(post)}>DELETE</Button>
                                     </TableCell>
                                     }
                                 </TableRow>
                             </tbody>
-                        </Table>
+                        </Table> */}
+                                    <Box xs={12} className={classes.postInfo}>
+                                        <Box sx={{padding: 0, border: 0, paddingBottom: 1, paddingLeft: 1, paddingRight: 2 }}>
+                                            <Avatar sx={{ width: 48, height: 48 }} src={pic} />
+                                        </Box>
+                                        <Box sx={{padding: 0, border: 0}} >
+                                            <Typography sx={{ justifyContent: 'flex-start' }}>
+                                                {objectPosts[post].author}
+                                            </Typography>
+                                            <Typography variant='subtitle2'>
+                                            {moment(objectPosts[post].date).format("Do MMM YY, h:mm a")}
+                                            </Typography>
+                                        </Box>
+                                    </Box>
+                                    {user === objectPosts[post].author &&
+                                    <Box align="right" sx={{border: 0, alignItems: 'flex-end'}}>
+                                        <Button onClick={()=> handleEditClick(post)}>EDIT</Button>
+                                        <Button onClick={()=> handleDeleteClick(post)}>DELETE</Button>
+                                    </Box>
+                                    }
                     </Grid>
                     <Grid sx={{padding: 3}}>{objectPosts[post].content}</Grid>
                     <Grid container sx={{borderTop: 1}}>
