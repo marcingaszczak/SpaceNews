@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Box } from '@mui/system';
-import { Avatar, Grid, TableCell, TableRow, Typography, Button, Table, Modal, TextField } from '@mui/material';
+import { Avatar, Grid, Typography, Button, Modal, TextField } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from "formik";
 import * as Yup from 'yup';
 import moment from "moment";
-import { makeStyles } from '@mui/styles'
+import { makeStyles } from '@mui/styles';
+import ModeCommentIcon from '@mui/icons-material/ModeComment';
 
 
 import pic from './../Img/default_profile.jpg';
@@ -54,6 +55,7 @@ const useStyle = makeStyles((theme) => ({
 
 function Posts() {
     const [open, setOpen] = useState(false);
+    //const [comments, setComments] = useState(false);
     let objectPosts = useSelector(state => state.posts)
     let user = useSelector(state => state.username)
     let state = useSelector(state => state)
@@ -107,6 +109,10 @@ function Posts() {
                 .catch(err => console.log('Fetch from database error ' + err))
         });
     }
+
+    // const handleCommentClick = () => {
+    //     setComments((prevState) => {return !prevState})
+    // }
 
     return (
         <React.Fragment>
@@ -175,58 +181,42 @@ function Posts() {
                 <Box textAlign='center' sx={{ border: 1, borderRadius: 2, width: '100%'}} mb={3} key={post}>
                 <Grid sx={{padding: 2}}>
                     <Grid xs={12} className={classes.header} >
-                        {/* <Table>
-                            <tbody>
-                                <TableRow >
-                                    <TableCell sx={{padding: 0, border: 0, paddingBottom: 1, paddingLeft: 1, width: '15%'}}>
-                                        <Avatar sx={{ width: 48, height: 48 }} src={pic} />
-                                    </TableCell>
-                                    <TableCell sx={{padding: 0, border: 0 }} >
-                                        <Typography >
-                                            {objectPosts[post].author}
-                                        </Typography>
-                                        <Typography variant='subtitle2'>
-                                        {moment(objectPosts[post].date).format("Do MMM YY, h:mm a")}
-                                        </Typography>
-                                    </TableCell>
-                                    {user === objectPosts[post].author &&
-                                    <TableCell xs={12} align="right" sx={{border: 0}}>
-                                        <Button onClick={()=> handleEditClick(post)}>EDIT</Button>
-                                        <Button onClick={()=> handleDeleteClick(post)}>DELETE</Button>
-                                    </TableCell>
-                                    }
-                                </TableRow>
-                            </tbody>
-                        </Table> */}
-                                    <Box xs={12} className={classes.postInfo}>
-                                        <Box sx={{padding: 0, border: 0, paddingBottom: 1, paddingLeft: 1, paddingRight: 2 }}>
-                                            <Avatar sx={{ width: 48, height: 48 }} src={pic} />
-                                        </Box>
-                                        <Box sx={{padding: 0, border: 0}} >
-                                            <Typography sx={{ justifyContent: 'flex-start' }}>
-                                                {objectPosts[post].author}
-                                            </Typography>
-                                            <Typography variant='subtitle2'>
-                                            {moment(objectPosts[post].date).format("Do MMM YY, h:mm a")}
-                                            </Typography>
-                                        </Box>
-                                    </Box>
-                                    {user === objectPosts[post].author &&
-                                    <Box align="right" sx={{border: 0, alignItems: 'flex-end'}}>
-                                        <Button onClick={()=> handleEditClick(post)}>EDIT</Button>
-                                        <Button onClick={()=> handleDeleteClick(post)}>DELETE</Button>
-                                    </Box>
-                                    }
+                        <Box xs={12} className={classes.postInfo}>
+                            <Box sx={{padding: 0, border: 0, paddingBottom: 1, paddingLeft: 1, paddingRight: 2 }}>
+                                <Avatar sx={{ width: 48, height: 48 }} src={pic} />
+                            </Box>
+                            <Box sx={{padding: 0, border: 0}} >
+                                <Typography sx={{ justifyContent: 'flex-start', fontWeight: 'bold' }}>
+                                    {objectPosts[post].author}
+                                </Typography>
+                                <Typography variant='subtitle2'>
+                                {moment(objectPosts[post].date).format("Do MMM YY, h:mm a")}
+                                </Typography>
+                            </Box>
+                        </Box>
+                        {user === objectPosts[post].author &&
+                        <Box align="right" sx={{border: 0, alignItems: 'flex-end'}}>
+                            <Button onClick={()=> handleEditClick(post)}>EDIT</Button>
+                            <Button onClick={()=> handleDeleteClick(post)}>DELETE</Button>
+                        </Box>
+                        }
                     </Grid>
                     <Grid sx={{padding: 3}}>{objectPosts[post].content}</Grid>
                     <Grid container sx={{borderTop: 1}}>
                         <Grid item xs={6}>
-                            <Comments />
+                            <Button
+                                startIcon={<ModeCommentIcon />}
+                                // onClick={handleCommentClick}
+                            >
+                                Comment
+                            </Button>
                         </Grid>
                         <Grid item xs={6}>
                             <Like id={post} likedBy={objectPosts[post].likedBy}/>
                         </Grid>
-
+                        {/* {comments &&  */}
+                            <Comments id={post} />
+                        {/* } */}
                     </Grid>
 
                 </Grid>
