@@ -110,7 +110,8 @@ function Comments(props) {
                                 likes: state.posts[clickedPost].likes,
                                 likedBy: state.posts[clickedPost].likedBy,
                                 commentsAmount: newComments,
-                                comments: comments
+                                comments: comments,
+                                toggleComments: false
                             })
                         })
                         .then(response => response.json())

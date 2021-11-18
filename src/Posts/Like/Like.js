@@ -50,7 +50,10 @@ function Like(props) {
                 content: state.posts[clickedPost].content,
                 date: state.posts[clickedPost].date,
                 likes: newLikes,
-                likedBy: likedBy})
+                likedBy: likedBy,
+                toggleComments: false,
+                commentsAmount: state.posts[clickedPost].commentsAmount,
+                comments: state.posts[clickedPost].comments})
         })
         .then(response => response.json())
         .then(data => {
@@ -88,7 +91,10 @@ function Like(props) {
                 content: state.posts[clickedPost].content,
                 date: state.posts[clickedPost].date,
                 likes: newLikes,
-                likedBy: remove})
+                likedBy: remove,
+                toggleComments: false,
+                commentsAmount: state.posts[clickedPost].commentsAmount,
+                comments: state.posts[clickedPost].comments})
         })
         .then(response => response.json())
         .then(data => {

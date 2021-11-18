@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box } from '@mui/system';
 import { Avatar, Grid, Typography, Button, Modal, TextField } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
@@ -65,6 +65,7 @@ function Posts() {
     //variables for editing post
     const [postData, setPostData] = useState('')
     const [clickedPost, setClickedPost] = useState('a')
+    const [commentClickedPost, setCommentClickedPost] = useState('');
     const postNamesArray = Object.keys(objectPosts)
     ////////////////////////////
 
@@ -72,6 +73,18 @@ function Posts() {
     let newObj = {};
     let revObj = {};
     //
+
+    //useEffect for handleCommentClick
+    useEffect(()=> {
+        if(commentClickedPost !== '') {
+            const newCom = state.posts
+            newCom[commentClickedPost].toggleComments = !newCom[commentClickedPost].toggleComments;
+            dispatch({type: 'toggleComment', posts: newCom})
+            setCommentClickedPost('')
+        }
+    }, [commentClickedPost])
+    //
+
 
     const handleEditClick = (props) => {
         setOpen(true)
@@ -110,9 +123,13 @@ function Posts() {
         });
     }
 
-    // const handleCommentClick = () => {
-    //     setComments((prevState) => {return !prevState})
-    // }
+    const handleCommentClick = (props) => {
+        postNamesArray.forEach(post => {
+            if(post === props) {
+                setCommentClickedPost(post);
+            }
+        })
+    }
 
     return (
         <React.Fragment>
@@ -206,17 +223,17 @@ function Posts() {
                         <Grid item xs={6}>
                             <Button
                                 startIcon={<ModeCommentIcon />}
-                                // onClick={handleCommentClick}
+                                onClick={() => handleCommentClick(post)}
                             >
-                                Comment
+                                Comments ({objectPosts[post].commentsAmount})
                             </Button>
                         </Grid>
                         <Grid item xs={6}>
                             <Like id={post} likedBy={objectPosts[post].likedBy}/>
                         </Grid>
-                        {/* {comments &&  */}
+                        {objectPosts[post].toggleComments &&
                             <Comments id={post} />
-                        {/* } */}
+                        }
                     </Grid>
 
                 </Grid>

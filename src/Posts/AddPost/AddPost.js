@@ -42,7 +42,9 @@ function AddPost() {
                                     author: username,
                                     content: values.content,
                                     date: timerTime,
-                                    likes: 0})
+                                    likes: 0,
+                                    toggleComments: false,
+                                    commentsAmount: 0})
                             })
                             .then(response => response.json())
                             .then(data => {

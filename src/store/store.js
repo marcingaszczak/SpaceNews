@@ -36,6 +36,15 @@ const loginReducer = (state = initialState, action) => {
                 posts: action.posts
         }
     }
+    else if(action.type === 'toggleComment'){
+        return{
+                token: state.token,
+                email: state.email,
+                username: state.username,
+                isLoggedIn: state.isLoggedIn,
+                posts: action.posts
+        }
+    }
     else if(action.type === 'like'){
         return{
                 token: state.token,
